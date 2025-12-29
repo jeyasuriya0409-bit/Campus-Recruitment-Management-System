@@ -5,20 +5,20 @@ import Home from "./pages/Home";
 import StudentDashboard from "./pages/StudentDashboard";
 import RecruiterDashboard from "./pages/RecruiterDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import "./App.css";
 
-export default function App() {
+function App() {
   return (
     <Router>
       <Navbar />
-
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/student" element={<StudentDashboard />} />
-          <Route path="/recruiter" element={<RecruiterDashboard />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-        </Routes>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/student" element={<StudentDashboard />} />
+        <Route path="/recruiter" element={<RecruiterDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Routes>
     </Router>
   );
 }
+
+export default App;

@@ -1,12 +1,10 @@
 import React from "react";
 
-export default function Home() {
-  return (
-    <div className="center">
-      <h1>Campus Recruitment Management System</h1>
-      <p className="subtitle">
-        Manage students, recruiters, and placement activities — all in one place.
-      </p>
-    </div>
-  );
-}
+const Home = () => (
+  <div className="center-text">
+    <h1>Campus Recruitment Management System</h1>
+    <p>Manage Jobs, Applications and Interviews Easily.</p>
+  </div>
+);
+
+export default Home;

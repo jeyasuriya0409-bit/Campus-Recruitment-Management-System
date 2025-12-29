@@ -1,22 +1,50 @@
-import React from "react";
-import AuthBox from "../components/AuthBox";
+import React, { useState } from "react";
+import Sidebar from "../components/Sidebar";
+import LoginForm from "../components/LoginForm";
 
-export default function StudentDashboard() {
+const StudentDashboard = () => {
+  const [selected, setSelected] = useState("View Jobs");
+
+  const tables = {
+    "View Jobs": (
+      <table>
+        <thead><tr><th>Job</th><th>Company</th></tr></thead>
+        <tbody>
+          <tr><td>Developer</td><td>ABC Tech</td></tr>
+        </tbody>
+      </table>
+    ),
+    "Apply for Jobs": (
+      <table>
+        <thead><tr><th>Job</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Developer</td><td>Applied</td></tr>
+        </tbody>
+      </table>
+    ),
+    "Check Application Status": (
+      <table>
+        <thead><tr><th>Application</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Developer</td><td>Under Review</td></tr>
+        </tbody>
+      </table>
+    ),
+  };
+
   return (
-    <div>
-      <h2>Student Dashboard</h2>
+    <div className="layout">
+      <Sidebar
+        items={["View Jobs", "Apply for Jobs", "Check Application Status"]}
+        onSelect={setSelected}
+      />
 
-      <div className="layout">
-        <AuthBox title="Student" />
-
-        <div className="card">
-          <h3 className="card-title">Student Actions</h3>
-
-          <button className="secondary-btn">View Jobs</button>
-          <button className="secondary-btn">Apply for Jobs</button>
-          <button className="secondary-btn">Check Application Status</button>
-        </div>
+      <div className="content">
+        <LoginForm />
+        <div className="table-box">{tables[selected]}</div>
       </div>
     </div>
   );
-}
+};
+
+export default StudentDashboard;

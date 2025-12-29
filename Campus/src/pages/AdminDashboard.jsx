@@ -1,23 +1,38 @@
-import React from "react";
-import AuthBox from "../components/AuthBox";
+import React, { useState } from "react";
+import Sidebar from "../components/Sidebar";
+import LoginForm from "../components/LoginForm";
 
-export default function AdminDashboard() {
+const AdminDashboard = () => {
+  const [selected, setSelected] = useState("View Dashboard");
+
+  const tables = {
+    "View Dashboard": (
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody><tr><td>Total Jobs</td><td>10</td></tr></tbody>
+      </table>
+    ),
+    "Track Metrics": (
+      <table>
+        <thead><tr><th>Category</th><th>Count</th></tr></thead>
+        <tbody><tr><td>Applications</td><td>50</td></tr></tbody>
+      </table>
+    )
+  };
+
   return (
-    <div>
-      <h2>Admin / Placement Cell Dashboard</h2>
+    <div className="layout">
+      <Sidebar
+        items={["View Dashboard", "Track Metrics"]}
+        onSelect={setSelected}
+      />
 
-      <div className="layout">
-        <AuthBox title="Admin" />
-
-        <div className="card">
-          <h3 className="card-title">Admin Actions</h3>
-
-          <button className="secondary-btn">View Dashboard</button>
-          <button className="secondary-btn">
-            Track Metrics (Jobs / Applications / Interviews)
-          </button>
-        </div>
+      <div className="content">
+        <LoginForm />
+        <div className="table-box">{tables[selected]}</div>
       </div>
     </div>
   );
-}
+};
+
+export default AdminDashboard;
