@@ -1,13 +1,21 @@
 import React from "react";
+import "./Sidebar.css";
 
-const Sidebar = ({ items, onSelect }) => (
-  <div className="sidebar">
-    {items.map(item => (
-      <button key={item} onClick={() => onSelect(item)}>
-        {item}
-      </button>
-    ))}
-  </div>
-);
+const Sidebar = ({ links = [] }) => {
+  return (
+    <div className="sidebar">
+      <h2>Dashboard</h2>
+
+      <ul>
+        {links.length === 0 ? (
+          <li>No menu items</li>
+        ) : (
+          links.map((link, index) => <li key={index}>{link}</li>)
+        )}
+      </ul>
+    </div>
+  );
+};
 
 export default Sidebar;
+

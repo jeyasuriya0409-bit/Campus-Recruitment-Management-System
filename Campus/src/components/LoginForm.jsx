@@ -1,13 +1,41 @@
-import React from "react";
-import "./LoginForm.css";
+import React, { useState } from "react";
 
-const LoginForm = () => (
-  <div className="login-box">
-    <h3>Login</h3>
-    <input placeholder="Username" />
-    <input type="password" placeholder="Password" />
-    <button>Login</button>
-  </div>
-);
+const LoginForm = ({ role, onLogin }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("Please enter email and password");
+      return;
+    }
+
+    onLogin(); 
+  };
+
+  return (
+    <form onSubmit={handleLogin} className="center-card">
+      <h2>{role.toUpperCase()} LOGIN</h2>
+
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <button type="submit">Login</button>
+    </form>
+  );
+};
 
 export default LoginForm;

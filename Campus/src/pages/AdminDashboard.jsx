@@ -3,35 +3,38 @@ import Sidebar from "../components/Sidebar";
 import LoginForm from "../components/LoginForm";
 
 const AdminDashboard = () => {
-  const [selected, setSelected] = useState("View Dashboard");
+  const links = ["View Jobs", "Students", "Reports"];
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const tables = {
-    "View Dashboard": (
-      <table>
-        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
-        <tbody><tr><td>Total Jobs</td><td>10</td></tr></tbody>
-      </table>
-    ),
-    "Track Metrics": (
-      <table>
-        <thead><tr><th>Category</th><th>Count</th></tr></thead>
-        <tbody><tr><td>Applications</td><td>50</td></tr></tbody>
-      </table>
-    )
+  const admin = {
+    name: "Placement Officer",
+    email: "admin@college.com",
   };
 
+  const stats = ["Total Students: 120", "Jobs Posted: 25", "Interviews Scheduled: 10"];
+
   return (
-    <div className="layout">
-      <Sidebar
-        items={["View Dashboard", "Track Metrics"]}
-        onSelect={setSelected}
-      />
+    <>
+      <Sidebar links={links} />
 
       <div className="content">
-        <LoginForm />
-        <div className="table-box">{tables[selected]}</div>
+        {!loggedIn ? (
+          <LoginForm role="admin" onLogin={() => setLoggedIn(true)} />
+        ) : (
+          <>
+            <h2>{admin.name}</h2>
+            <p>Email: {admin.email}</p>
+
+            <h3>Dashboard Stats</h3>
+            <ul>
+              {stats.map((s, index) => (
+                <li key={index}>{s}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

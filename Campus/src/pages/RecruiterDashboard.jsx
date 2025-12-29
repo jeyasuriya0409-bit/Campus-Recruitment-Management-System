@@ -3,47 +3,45 @@ import Sidebar from "../components/Sidebar";
 import LoginForm from "../components/LoginForm";
 
 const RecruiterDashboard = () => {
-  const [selected, setSelected] = useState("Post Jobs");
+  const links = ["Post Jobs", "View Applications", "Schedule Interviews", "Give Feedback"];
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const tables = {
-    "Post Jobs": (
-      <table>
-        <thead><tr><th>Job</th><th>Date</th></tr></thead>
-        <tbody><tr><td>Junior Dev</td><td>Dec 29</td></tr></tbody>
-      </table>
-    ),
-    "View Applications": (
-      <table>
-        <thead><tr><th>Student</th><th>Status</th></tr></thead>
-        <tbody><tr><td>Rahul</td><td>Pending</td></tr></tbody>
-      </table>
-    ),
-    "Schedule Interviews": (
-      <table>
-        <thead><tr><th>Student</th><th>Date</th></tr></thead>
-        <tbody><tr><td>Rahul</td><td>Jan 5</td></tr></tbody>
-      </table>
-    ),
-    "Give Feedback": (
-      <table>
-        <thead><tr><th>Student</th><th>Feedback</th></tr></thead>
-        <tbody><tr><td>Rahul</td><td>Good</td></tr></tbody>
-      </table>
-    ),
+  const recruiter = {
+    company: "Google",
+    hr: "Priya Sharma",
+    email: "hr@google.com",
   };
 
+  const applications = [
+    "Student 1 - React Developer",
+    "Student 2 - Backend Developer",
+    "Student 3 - QA Engineer",
+  ];
+
   return (
-    <div className="layout">
-      <Sidebar
-        items={["Post Jobs", "View Applications", "Schedule Interviews", "Give Feedback"]}
-        onSelect={setSelected}
-      />
+    <>
+      <Sidebar links={links} />
 
       <div className="content">
-        <LoginForm />
-        <div className="table-box">{tables[selected]}</div>
+        {!loggedIn ? (
+          <LoginForm role="recruiter" onLogin={() => setLoggedIn(true)} />
+        ) : (
+          <>
+            <h2>{recruiter.company} Recruiter Dashboard</h2>
+
+            <p>HR: {recruiter.hr}</p>
+            <p>Email: {recruiter.email}</p>
+
+            <h3>Applications</h3>
+            <ul>
+              {applications.map((a, index) => (
+                <li key={index}>{a}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

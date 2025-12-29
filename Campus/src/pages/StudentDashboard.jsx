@@ -3,47 +3,45 @@ import Sidebar from "../components/Sidebar";
 import LoginForm from "../components/LoginForm";
 
 const StudentDashboard = () => {
-  const [selected, setSelected] = useState("View Jobs");
+  const links = ["View Jobs", "Apply for Jobs", "Check Application Status"];
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const tables = {
-    "View Jobs": (
-      <table>
-        <thead><tr><th>Job</th><th>Company</th></tr></thead>
-        <tbody>
-          <tr><td>Developer</td><td>ABC Tech</td></tr>
-        </tbody>
-      </table>
-    ),
-    "Apply for Jobs": (
-      <table>
-        <thead><tr><th>Job</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td>Developer</td><td>Applied</td></tr>
-        </tbody>
-      </table>
-    ),
-    "Check Application Status": (
-      <table>
-        <thead><tr><th>Application</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td>Developer</td><td>Under Review</td></tr>
-        </tbody>
-      </table>
-    ),
+  const userDetails = {
+    name: "John Student",
+    email: "student@example.com",
+    course: "B.E CSE",
   };
 
+  const jobs = [
+    "Software Developer - TCS",
+    "Frontend Intern - Infosys",
+    "Java Developer - Wipro",
+  ];
+
   return (
-    <div className="layout">
-      <Sidebar
-        items={["View Jobs", "Apply for Jobs", "Check Application Status"]}
-        onSelect={setSelected}
-      />
+    <>
+      <Sidebar links={links} />
 
       <div className="content">
-        <LoginForm />
-        <div className="table-box">{tables[selected]}</div>
+        {!loggedIn ? (
+          <LoginForm role="student" onLogin={() => setLoggedIn(true)} />
+        ) : (
+          <>
+            <h2>Welcome, {userDetails.name}</h2>
+
+            <p>Email: {userDetails.email}</p>
+            <p>Course: {userDetails.course}</p>
+
+            <h3>Available Jobs</h3>
+            <ul>
+              {jobs.map((job, index) => (
+                <li key={index}>{job}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
