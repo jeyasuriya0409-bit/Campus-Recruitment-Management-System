@@ -12,7 +12,7 @@ const LoginForm = ({ role, onLogin }) => {
       return;
     }
 
-    onLogin(); 
+    onLogin(email); 
   };
 
   return (

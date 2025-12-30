@@ -4,12 +4,12 @@ import LoginForm from "../components/LoginForm";
 
 const RecruiterDashboard = () => {
   const links = ["Post Jobs", "View Applications", "Schedule Interviews", "Give Feedback"];
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  const [userEmail, setUserEmail] = useState("");
 
   const recruiter = {
     company: "Google",
-    hr: "Priya Sharma",
-    email: "hr@google.com",
+    
   };
 
   const applications = [
@@ -18,19 +18,21 @@ const RecruiterDashboard = () => {
     "Student 3 - QA Engineer",
   ];
 
+  const handleLogin = (email) => setUserEmail(email);
+
   return (
     <>
       <Sidebar links={links} />
 
       <div className="content">
-        {!loggedIn ? (
-          <LoginForm role="recruiter" onLogin={() => setLoggedIn(true)} />
+        {!userEmail ? (
+          <LoginForm role="recruiter" onLogin={handleLogin} />
         ) : (
           <>
             <h2>{recruiter.company} Recruiter Dashboard</h2>
 
-            <p>HR: {recruiter.hr}</p>
-            <p>Email: {recruiter.email}</p>
+            
+            <p>Email: {userEmail}</p>
 
             <h3>Applications</h3>
             <ul>
